@@ -5,9 +5,11 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import HomePage from "./pages/Home/HomePage";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
 import DashboardGuard from "./guard/DashboardGuard";
+import AuthProvider from "./provider/Auth";
 
 function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -20,6 +22,7 @@ function App() {
             }/>
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 

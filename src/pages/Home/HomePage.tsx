@@ -1,5 +1,6 @@
 import React, { FormEvent } from "react";
 import Select from "../../components/Select/Select";
+import Input from "../../components/Input/Input";
 import Option from "../../components/Select/Option/Option";
 import "./HomePage.scss";
 const HomePage = () => {
@@ -11,7 +12,11 @@ const HomePage = () => {
   );
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    let formData = new FormData(event.currentTarget);
+    let username = formData.get("username") as string;
   };
+
+
 
   return (
     <div className="home">
@@ -55,30 +60,17 @@ const HomePage = () => {
           </div>
           <form onSubmit={handleSubmit}>
             <div>
-              <Select placeholder="Choose an option">
-                <Option value="one">One</Option>
-                <Option value="two">Two</Option>
-                <Option value="three">Three</Option>
-                <Option value="four">Four</Option>
+              <Select placeholder="Tipo">
+                <Option value="DNI">DNI</Option>
+                <Option value="PASAPORTE">Pasaporte</Option>
               </Select>
-              {/* <select name="select">
-                <option value="value1">Value 1</option>
-                <option value="value2" selected>
-                  Value 2
-                </option>
-                <option value="value3">Value 3</option>
-              </select> */}
-              <input
-                name="documentNumber"
-                type="number"
-                placeholder="Nro. de doc"
-              />
+              <Input placeholder="Número" name="documentNumber" handleInputChange={e => props.setState({documentNumber: e.target.value})} value={props.state}/>
             </div>
             <div>
-              <input name="phoneNumber" type="number" placeholder="Celular" />
+            <Input placeholder="Celular" name="phoneNumber" handleInputChange={e => props.setState({phoneNumber: e.target.value})} value={props.state}/>
             </div>
-            <div>
-              <input name="cardNumber" type="text" placeholder="Placa" />
+            <div>¡
+              <Input label="Placa" name="carNumber" handleInputChange={e => props.setState({carNumber: e.target.value})} value={props.state}/>
             </div>
             <div>
               <label>
