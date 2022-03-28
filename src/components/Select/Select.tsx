@@ -115,8 +115,6 @@ const Select: React.FunctionComponent<SelectProps> = ({
       )
     ) {
       setIsOpen(true);
-
-      // set focus on the list item
       highlightOption(0);
     }
   };
@@ -158,9 +156,8 @@ const Select: React.FunctionComponent<SelectProps> = ({
   return (
     <div className="select">
       <button
-        data-testid="DseSelectButton"
         onKeyDown={onButtonKeyDown}
-        aria-controls="dse-select-list"
+        aria-controls="select-list"
         aria-haspopup={true}
         aria-expanded={isOpen ? true : undefined}
         ref={labelRef}
@@ -175,10 +172,10 @@ const Select: React.FunctionComponent<SelectProps> = ({
         <ul
           role="menu"
           aria-hidden={isOpen ? undefined : false}
-          id="dse-select-list"
+          id="select-list"
           style={{ top: overlayTop }}
-          className={`dse-select__overlay ${
-            isOpen ? "dse-select__overlay--open" : ""
+          className={`select__overlay ${
+            isOpen ? "select__overlay--open" : ""
           }`}
         >
           {options.map((option, optionIndex) => {
@@ -201,15 +198,15 @@ const Select: React.FunctionComponent<SelectProps> = ({
                   tabIndex: isHighlighted ? -1 : 0,
                   onMouseEnter: () => highlightOption(optionIndex),
                   onMouseLeave: () => highlightOption(null),
-                  className: `dse-select__option
+                  className: `select__option
                                 ${
                                   isSelected
-                                    ? "dse-select__option--selected"
+                                    ? "select__option--selected"
                                     : ""
                                 }
                                 ${
                                   isHighlighted
-                                    ? "dse-select__option--highlighted"
+                                    ? "select__option--highlighted"
                                     : ""
                                 }
                             `,
