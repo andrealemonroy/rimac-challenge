@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { FormEvent, useReducer, useState } from "react";
 import Select from "../../components/Select/Select";
 import Input from "../../components/Input/Input";
 import "./HomePage.scss";
@@ -6,6 +6,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../provider/useAuth";
 
 const HomePage = () => {
+  const [error, setError] = useState("");
+  const [disabled, setDisabled] = useState(true);
+  const [state, setState] = useReducer((s: any, a: any) => ({ ...s, ...a }), {
+    documentNumber: "",
+    phoneNumber: "",
+    carNumber: "",
+  });
   const options = [
     {
       label: "DNI",
@@ -16,21 +23,14 @@ const HomePage = () => {
       value: "PASAPORTE",
     },
   ];
-  const [state, setState] = React.useReducer(
-    (s: any, a: any) => ({ ...s, ...a }),
-    {
-      documentNumber: "",
-      phoneNumber: "",
-      carNumber: "",
-    }
-  );
   const handleInputChange = (e: { target: { value: string; name: any } }) => {
-    console.log(e.target);
     if (e.target.value === "") {
-      // setValue("Este campo es obligatorio");
-      // setDisabled(true);
+      setError("Debes completar todos los campos");
+    } else {
+      setError("")
+      setDisabled(false)
+      setState({ [e.target.name]: e.target.value });
     }
-    setState({ [e.target.name]: e.target.value });
   };
   type LocationProps = {
     state: {
@@ -45,7 +45,6 @@ const HomePage = () => {
   console.log(from);
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
     auth.signin(state, () => {
       navigate(from, { replace: true });
     });
@@ -132,7 +131,14 @@ const HomePage = () => {
                 <span className="checkmark"></span>
               </label>
             </div>
-            <button className="home__data__form__button">COTÍZALO</button>
+            <p>{error}</p>
+            {disabled ? (
+              <button className="home__data__form__button" disabled>
+                COTÍZALO
+              </button>
+            ) : (
+              <button className="home__data__form__button">COTÍZALO</button>
+            )}
           </form>
         </div>
       </div>
