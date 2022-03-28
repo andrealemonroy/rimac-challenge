@@ -42,7 +42,7 @@ const HomePage = () => {
   let auth = useAuth();
 
   let from = location.state?.from?.pathname || "/protected";
-  console.log(from)
+  console.log(from);
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -61,19 +61,21 @@ const HomePage = () => {
           <div className="home__background__content__illustration">
             <img src="/img/homeIlustracion.svg" />
           </div>
-          <div className="home__background__content__highlight">
-            <p>¡NUEVO!</p>
-          </div>
-          <div className="home__background__content__title">
-            <span className="home__background__content__title-gray">
-              Seguro{" "}
-            </span>
-            <span className="home__background__content__title-red">
-              Vehicular Tracking
-            </span>
-          </div>
-          <div className="home__background__content__paragraph">
-            <p>Cuéntanos donde le haras seguimiento a tu seguro</p>
+          <div>
+            <div className="home__background__content__highlight">
+              <p>¡NUEVO!</p>
+            </div>
+            <div className="home__background__content__title">
+              <span className="home__background__content__title-gray">
+                Seguro{" "}
+              </span>
+              <span className="home__background__content__title-red">
+                Vehicular Tracking
+              </span>
+            </div>
+            <div className="home__background__content__paragraph">
+              <p>Cuéntanos donde le haras seguimiento a tu seguro</p>
+            </div>
           </div>
         </div>
       </div>
