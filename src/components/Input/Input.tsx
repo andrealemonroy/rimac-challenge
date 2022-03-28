@@ -1,8 +1,13 @@
 import React from "react";
-
-export const Input = (props) => {
+import './Input.scss'
+const Input = (props: {
+  placeholder: any;
+  name?: any;
+  value?: any;
+  handleInputChange?: any;
+}) => {
+  console.log(props)
   return (
-    <div className="w-full">
       <input
         type="text"
         placeholder={props.placeholder}
@@ -10,8 +15,9 @@ export const Input = (props) => {
         value={props.value}
         onChange={props.handleInputChange}
         autoComplete="off"
-        className=""
+        className="input"
       />
-    </div>
   );
 };
+
+export default Input;

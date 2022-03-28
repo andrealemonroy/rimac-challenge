@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -5,6 +6,10 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+*{
+  font-family: 'Lato';
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -37,3 +42,7 @@
   }
 }
 
+
+.flex{
+  display: flex;
+}

@@ -1,29 +1,66 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.scss";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import HomePage from "./pages/Home/HomePage";
+import * as React from "react";
+import {
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+  useLocation,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+
 import DashboardPage from "./pages/Dashboard/DashboardPage";
-import DashboardGuard from "./guard/DashboardGuard";
+import HomePage from "./pages/Home/HomePage";
+import useAuth from "./provider/useAuth";
 import AuthProvider from "./provider/Auth";
 
-function App() {
+export default function App() {
   return (
     <AuthProvider>
-    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route
+        <Route>
+          <Route path="/" element={<HomePage />} />
+          <Route
             path="/protected"
             element={
-              <DashboardGuard>
+              <RequireAuth >
                 <DashboardPage />
-              </DashboardGuard>
-            }/>
+              </RequireAuth>
+            }
+          />
+        </Route>
       </Routes>
-    </BrowserRouter>
     </AuthProvider>
   );
 }
 
-export default App;
+
+
+
+
+
+
+
+
+function RequireAuth({ children }: { children: JSX.Element }) {
+  let auth = useAuth();
+  let location = useLocation();
+
+  if (!auth.user) {
+    // Redirect them to the /login page, but save the current location they were
+    // trying to go to when they were redirected. This allows us to send them
+    // along to that page after they login, which is a nicer user experience
+    // than dropping them off on the home page.
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
+
+function PublicPage() {
+  return <h3>Public</h3>;
+}
+
+function ProtectedPage() {
+  return <h3>Protected</h3>;
+}

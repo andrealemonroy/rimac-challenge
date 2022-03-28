@@ -1,22 +1,55 @@
 import React, { FormEvent } from "react";
 import Select from "../../components/Select/Select";
 import Input from "../../components/Input/Input";
-import Option from "../../components/Select/Option/Option";
 import "./HomePage.scss";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../provider/useAuth";
+
 const HomePage = () => {
-  const TYPES_DOCUMENT = ["DNI", "PASAPORTE"];
-  type TypesDocument = typeof TYPES_DOCUMENT[number];
-
-  const [selected, setSelected] = React.useState<TypesDocument>(
-    TYPES_DOCUMENT[0]
+  const options = [
+    {
+      label: "DNI",
+      value: "DNI",
+    },
+    {
+      label: "PASAPORTE",
+      value: "PASAPORTE",
+    },
+  ];
+  const [state, setState] = React.useReducer(
+    (s: any, a: any) => ({ ...s, ...a }),
+    {
+      documentNumber: "",
+      phoneNumber: "",
+      carNumber: "",
+    }
   );
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    let formData = new FormData(event.currentTarget);
-    let username = formData.get("username") as string;
+  const handleInputChange = (e: { target: { value: string; name: any } }) => {
+    console.log(e.target);
+    if (e.target.value === "") {
+      // setValue("Este campo es obligatorio");
+      // setDisabled(true);
+    }
+    setState({ [e.target.name]: e.target.value });
   };
+  type LocationProps = {
+    state: {
+      from: Location;
+    };
+  };
+  let navigate = useNavigate();
+  const location = useLocation() as unknown as LocationProps;
+  let auth = useAuth();
 
+  let from = location.state?.from?.pathname || "/protected";
+  console.log(from)
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
+    auth.signin(state, () => {
+      navigate(from, { replace: true });
+    });
+  }
 
   return (
     <div className="home">
@@ -58,28 +91,46 @@ const HomePage = () => {
           <div className="home__data__form__title">
             <p>Déjanos tus datos</p>
           </div>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <Select placeholder="Tipo">
-                <Option value="DNI">DNI</Option>
-                <Option value="PASAPORTE">Pasaporte</Option>
-              </Select>
-              <Input placeholder="Número" name="documentNumber" handleInputChange={e => props.setState({documentNumber: e.target.value})} value={props.state}/>
+          <form onSubmit={handleSubmit} className="w-100 sm:w-96">
+            <div className="flex mt-6">
+              <Select options={options} />
+              <Input
+                placeholder="Nro. de doc"
+                name="documentNumber"
+                handleInputChange={handleInputChange}
+                value={state.documentNumber}
+              />
             </div>
-            <div>
-            <Input placeholder="Celular" name="phoneNumber" handleInputChange={e => props.setState({phoneNumber: e.target.value})} value={props.state}/>
+            <div className="mt-4">
+              <Input
+                placeholder="Celular"
+                name="phoneNumber"
+                handleInputChange={handleInputChange}
+                value={state.phoneNumber}
+              />
             </div>
-            <div>¡
-              <Input label="Placa" name="carNumber" handleInputChange={e => props.setState({carNumber: e.target.value})} value={props.state}/>
+            <div className="mt-4">
+              <Input
+                placeholder="Placa"
+                name="carNumber"
+                handleInputChange={handleInputChange}
+                value={state.carNumber}
+              />
             </div>
-            <div>
-              <label>
-                <input type="checkbox" id="cbox1" value="first_checkbox" />{" "}
-                Acepto la Política de Protecciòn de Datos Personales y los
-                Términos y Condiciones.
+            <div className="mt-6">
+              <label className="home__data__form__terms">
+                Acepto la <a>Política de Protección de Datos Personales</a> y
+                los
+                <a> Términos y Condiciones</a>.
+                <input
+                  type="checkbox"
+                  id="terms__checkbox"
+                  value="terms__checkbox"
+                />
+                <span className="checkmark"></span>
               </label>
             </div>
-            <button type="submit">COTÍZALO</button>
+            <button className="home__data__form__button">COTÍZALO</button>
           </form>
         </div>
       </div>

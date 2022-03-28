@@ -1,71 +1,75 @@
-.App {
-    font-family: sans-serif;
-  }
-  
-  .title {
-    text-align: center;
-  }
-  
-  .select-container {
-    display: inline-block;
-    position: relative;
-    width: 400px;
-    background-color: #c1c1c1;
-    border-radius: 5px;
-  }
-  
-  .selected-text {
-    padding: 10px 20px;
+.select {
+  &__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    // @include padding("xs");
+    border: 1px solid #c5cbe0;
+    background: #fff;
+    padding: 16px;
+    // font-family: $body-font-family;
+    border-radius: 4px 0 0 4px;
     cursor: pointer;
+    p{
+      margin-right: 9px;
+    }
   }
-  
-  .selected-text::after {
-    content: "";
-    position: absolute;
-    right: 10px;
-    top: 16px;
-    border: 7px solid transparent;
-    border-color: black transparent transparent transparent;
+
+  &__caret {
+    transition: all 250ms ease;
+
+    &--open {
+      transform: rotate(180deg);
+    }
+
+    &--closed {
+      transform: rotate(0deg);
+    }
   }
-  
-  ul {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    border-radius: 5px;
-  }
-  
-  .select-options {
-    position: absolute;
-    margin-top: 5px;
-    width: 100%;
-    border: 1px solid #e4e4e4;
-  }
-  
-  li {
+
+  &__overlay {
+    // @include padding("none");
+    // @include margin("none");
+
+    border: 1px solid #c5cbe0;
+    background-color: #fff;
+    z-index: 99;
+    display: none;
+
     list-style-type: none;
-    padding: 6px 20px;
-    border-bottom: 1px solid #e4e4e4;
+
+    // box-shadow: map-get($shadows, "base");
+
+    position: absolute;
+
+    width: 100%;
+  }
+
+  &__option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     cursor: pointer;
+    // @include padding("xs");
+    box-sizing: border-box;
   }
-  
-  li:last-child {
-    border-bottom: none;
+
+  &__option--highlighted {
+    background-color: #c5cbe0;
   }
-  
-  li:hover {
-    background-color: #d9d9d9;
+
+  &__option--selected {
+    background-color: #c5cbe0;
+    color: #000;
   }
-  
-  .show-dropdown-options {
-    min-height: 50px;
-    opacity: 1;
-    visibility: visible;
+}
+
+.dse-select__overlay {
+  display: none;
+  list-style-type: none;
+  &--open {
+    display: block;
   }
-  
-  .hide-dropdown-options {
-    min-height: 0;
-    opacity: 0;
-    visibility: hidden;
-  }
-  
+}

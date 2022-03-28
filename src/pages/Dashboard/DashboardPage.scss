@@ -1,0 +1,140 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e4e8f7;
+  padding: 20px 100px;
+  &__contact {
+    display: flex;
+    gap: 20px;
+    &__phone {
+      display: flex;
+      gap: 20px;
+    }
+  }
+}
+.dashboard {
+  color: #676f8f;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  &__nav {
+    display: flex;
+    background-color: #f7f8fc;
+    height: 100%;
+    ul {
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+    }
+  }
+  &__content {
+    margin-left: 96px;
+    margin-top: 48px;
+    h2 {
+      font-size: 40px;
+      span {
+        color: #ef3340;
+      }
+    }
+    &__info {
+      display: grid;
+      grid-template-columns: 50% 50%;
+    }
+    &__card {
+      border: 3px solid #f0f2fa;
+      box-sizing: border-box;
+      border-radius: 12px;
+      display: flex;
+      height: 172px;
+      width: 384px;
+      &__text {
+        justify-content: center;
+        margin: auto;
+        padding-left: 32px;
+        padding-right: 32px;
+        p {
+          font-size: 12px;
+          font-weight: 400;
+        }
+        h3 {
+          font-size: 20px;
+          font-weight: 400;
+        }
+      }
+      img {
+        position: relative;
+        height: 179px;
+        top: -11px;
+      }
+    }
+    &__amount {
+      position: inherit;
+      &__button {
+        background: #ef3340;
+        border-radius: 8px;
+        color: #fff;
+        padding: 20px 32px;
+        font-weight: 700;
+        width: 224px;
+        text-align: center;
+      }
+    }
+    &__extra {
+      &__input {
+        input[type="number"] {
+          -webkit-appearance: textfield;
+          -moz-appearance: textfield;
+          appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+        }
+
+        border: 2px solid #ddd;
+        display: inline-flex;
+
+        box-sizing: border-box;
+
+        button {
+          outline: none;
+          -webkit-appearance: none;
+          background-color: #eeeeee;
+          border: none;
+          align-items: center;
+          justify-content: center;
+          width: 2.5rem;
+          cursor: pointer;
+          margin: 0;
+          position: relative;
+          padding: 0;
+        }
+
+        button:before,
+        button:after {
+          display: inline-block;
+          position: absolute;
+          content: "";
+          width: 0.5rem;
+          height: 2px;
+          background-color: #212121;
+          transform: translate(-50%, -50%);
+        }
+        button.plus:after {
+          transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        input[type="number"] {
+          font-family: sans-serif;
+          max-width: 4.5rem;
+          padding: 0.5rem;
+          border: 0;
+          text-align: center;
+          outline: none;
+        }
+        border: solid #c2c4c6;
+        border-width: 2px;
+      }
+    }
+  }
+}
