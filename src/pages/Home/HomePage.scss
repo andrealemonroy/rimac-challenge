@@ -190,13 +190,15 @@ $color-acian: #6f7dff;
           background-color: #f7f8fc;
           img {
             position: absolute;
-            top: -50px;
+            top: -100px;
             right: -120px;
+            width: 80%;
           }
         }
         &__text {
           position: absolute;
           top: 50px;
+          width: 80%;
         }
         &__highlight,
         &__title,
