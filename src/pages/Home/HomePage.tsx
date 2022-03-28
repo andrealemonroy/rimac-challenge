@@ -24,13 +24,7 @@ const HomePage = () => {
     },
   ];
   const handleInputChange = (e: { target: { value: string; name: any } }) => {
-    if (e.target.value === "") {
-      setError("Debes completar todos los campos");
-    } else {
-      setError("")
-      setDisabled(false)
-      setState({ [e.target.name]: e.target.value });
-    }
+    setState({ [e.target.name]: e.target.value });
   };
   type LocationProps = {
     state: {
@@ -42,12 +36,21 @@ const HomePage = () => {
   let auth = useAuth();
 
   let from = location.state?.from?.pathname || "/protected";
-  console.log(from);
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    auth.signin(state, () => {
-      navigate(from, { replace: true });
-    });
+    if (
+      state.documentNumber == "" ||
+      state.phoneNumber == "" ||
+      state.carNumber == ""
+    ) {
+      setError("Debes completar todos los campos");
+    } else {
+      setError("");
+      setDisabled(false);
+      auth.signin(state, () => {
+        navigate(from, { replace: true });
+      });
+    }
   }
 
   return (
@@ -133,7 +136,7 @@ const HomePage = () => {
             </div>
             <p>{error}</p>
             {disabled ? (
-              <button className="home__data__form__button" disabled>
+              <button className="home__data__form__button-disabled" disabled>
                 COTÍZALO
               </button>
             ) : (

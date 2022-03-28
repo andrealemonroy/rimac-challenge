@@ -101,6 +101,12 @@ $color-acian: #6f7dff;
         color: #fff;
         padding: 20px 32px;
         font-weight: 700;
+        &-disabled{
+          background: #676f8f;
+          border-radius: 8px;
+          padding: 20px 32px;
+          color: #fff;
+        }
       }
       &__terms {
         display: block;
@@ -203,6 +209,9 @@ $color-acian: #6f7dff;
         width: 90%;
         &__button {
           width: 100%;
+          &-disabled{
+            width: 100%;
+          }
         }
       }
     }
