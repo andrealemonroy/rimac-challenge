@@ -101,7 +101,7 @@ $color-acian: #6f7dff;
         color: #fff;
         padding: 20px 32px;
         font-weight: 700;
-        &-disabled{
+        &-disabled {
           background: #676f8f;
           border-radius: 8px;
           padding: 20px 32px;
@@ -189,13 +189,29 @@ $color-acian: #6f7dff;
           width: 100%;
           background-color: #f7f8fc;
           img {
-            margin-left: 40%;
+            position: absolute;
+            top: -50px;
+            right: -120px;
           }
+        }
+        &__text {
+          position: absolute;
+          top: 50px;
         }
         &__highlight,
         &__title,
         &__paragraph {
-          margin-left: 32px;
+          margin-left: 20px;
+
+        }
+        &__highlight{
+          font-size: 10px;
+        }
+        &__title{
+          font-size: 28px;
+        }
+        &__paragraph{
+          font-size: 14px
         }
       }
     }
@@ -209,7 +225,7 @@ $color-acian: #6f7dff;
         width: 90%;
         &__button {
           width: 100%;
-          &-disabled{
+          &-disabled {
             width: 100%;
           }
         }

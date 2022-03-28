@@ -72,7 +72,7 @@ const HomePage = () => {
           <div className="home__background__content__illustration">
             <img src="/img/homeIlustracion.svg" />
           </div>
-          <div>
+          <div className="home__background__content__text">
             <div className="home__background__content__highlight">
               <p>¡NUEVO!</p>
             </div>
@@ -84,8 +84,8 @@ const HomePage = () => {
                 Vehicular Tracking
               </span>
             </div>
-            <div className="home__background__content__paragraph">
-              <p>Cuéntanos donde le haras seguimiento a tu seguro</p>
+            <div className="home__background__content__paragraph mt-4">
+              <p>Cuéntanos donde le harás seguimiento a tu seguro</p>
             </div>
           </div>
         </div>
