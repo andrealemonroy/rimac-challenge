@@ -25,6 +25,15 @@ const HomePage = () => {
   ];
   const handleInputChange = (e: { target: { value: string; name: any } }) => {
     setState({ [e.target.name]: e.target.value });
+    if (
+      state.documentNumber == "" ||
+      state.phoneNumber == "" ||
+      state.carNumber == ""
+    ) {
+      setError("Debes completar todos los campos");
+    } else {
+      setDisabled(false)
+    }
   };
   type LocationProps = {
     state: {
